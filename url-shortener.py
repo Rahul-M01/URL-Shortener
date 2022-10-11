@@ -5,7 +5,9 @@ import models, schemas, CRUD
 from database import SessionLocal, engine 
 import validators
 import secrets
+import socket
 
+hostname = socket.gethostname()
 app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
 
@@ -29,7 +31,7 @@ def url_shortener(url: schemas.URLBase, db: Session = Depends(get_db)):
     if not validators.url(url.target_url):
         raise_bad_request(message="Your provided URL is not valid")
     db_url = CRUD.create_db_url(db=db, url=url)
-    db_url.url = f"https://urlshortit.herokuapp.com/{db_url.key}"
+    db_url.url = f"{hostname}/{db_url.key}"
     db_url.admin_url = db_url.secret_key
     return db_url
 
