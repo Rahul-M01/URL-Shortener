@@ -1,0 +1,1 @@
+uvicorn url-shortener:app
