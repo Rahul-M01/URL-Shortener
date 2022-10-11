@@ -2,8 +2,8 @@ from pydantic import BaseSettings
 from functools import lru_cache
 
 class Settings(BaseSettings):
-    env_name: str = "Local"
-    base_url: str = "http://localhost:8000"
+    env_name: str = "Heroku"
+    base_url: str = "https://urlshortit.herokuapp.com/"
     db_url: str = "sqlite:///./shortener.db"
     class Config:
         env_file = ".env"

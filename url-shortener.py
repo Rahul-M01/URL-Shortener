@@ -29,7 +29,7 @@ def url_shortener(url: schemas.URLBase, db: Session = Depends(get_db)):
     if not validators.url(url.target_url):
         raise_bad_request(message="Your provided URL is not valid")
     db_url = CRUD.create_db_url(db=db, url=url)
-    db_url.url = f"http://127.0.0.1:8000/{db_url.key}"
+    db_url.url = f"https://urlshortit.herokuapp.com/{db_url.key}"
     db_url.admin_url = db_url.secret_key
     return db_url
 
